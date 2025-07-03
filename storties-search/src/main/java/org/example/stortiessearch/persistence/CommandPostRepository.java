@@ -24,8 +24,12 @@ public class CommandPostRepository {
         return postJpaRepository.save(postEntity);
     }
 
-    public void deletePostById(Long postId) {
+    public void deletePostByPostId(Long postId) {
         postJpaRepository.deleteById(postId);
+    }
+
+    public void deleteLikeById(Long id) {
+        postJpaRepository.deleteById(id);
     }
 
     public void savePostViewLog(Long postId, Long userId) {

@@ -4,6 +4,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.persistence.model.PostEntity;
+import org.example.stortiessearch.persistence.model.PostLikeEntity;
 import org.example.stortiessearch.persistence.repository.PostJpaRepository;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -53,6 +54,14 @@ public class QueryPostRepository {
             .from(postLikeEntity)
             .groupBy(postLikeEntity.post.id)
             .where(postLikeEntity.post.id.eq(postId))
+            .fetchOne();
+    }
+
+    public PostLikeEntity queryLikeByPostIdAndUserId(Long postId, Long userId) {
+        return queryFactory
+            .select(postLikeEntity)
+            .from(postLikeEntity)
+            .where(postLikeEntity.post.id.eq(postId).and(postLikeEntity.userId.eq(userId)))
             .fetchOne();
     }
 

@@ -8,7 +8,6 @@ import org.example.stortiessearch.infrastructure.grpc.user.AuthenticatedUser;
 import org.example.stortiessearch.persistence.CommandPostRepository;
 import org.example.stortiessearch.persistence.QueryPostRepository;
 import org.example.stortiessearch.persistence.model.PostEntity;
-import org.example.stortiessearch.persistence.repository.PostJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +28,6 @@ public class DeletePostService {
            throw ErrorCodes.POST_DELETE_FORBIDDEN.throwException();
         }
 
-        commandPostRepository.deletePostById(postId);
+        commandPostRepository.deletePostByPostId(postId);
     }
 }
