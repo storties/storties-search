@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_URL}:5432/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show_sql: true
+    open-in-view: false
+grpc:
+  server:
+    port: 9091
+  client:
+    auth-service:
+      address: static://localhost:9090
+      negotiationType: plaintext
