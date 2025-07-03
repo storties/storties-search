@@ -8,6 +8,7 @@ import org.example.stortiessearch.persistence.repository.PostJpaRepository;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
+import static org.example.stortiessearch.persistence.model.QPostEntity.postEntity;
 import static org.example.stortiessearch.persistence.model.QPostLikeEntity.postLikeEntity;
 import static org.example.stortiessearch.persistence.model.QPostViewLogEntity.postViewLogEntity;
 
@@ -26,6 +27,15 @@ public class QueryPostRepository {
 
     public List<PostEntity> queryAllPost() {
         return (List<PostEntity>) postJpaRepository.findAll();
+    }
+
+    public List<PostEntity> queryPostWithPaging(long page) {
+        return queryFactory
+            .select(postEntity)
+            .from(postEntity)
+            .offset((page-1) * 10)
+            .limit(10)
+            .fetch();
     }
 
     public Long queryViewCount(Long postId) {
