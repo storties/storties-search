@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.common.AuthenticatedUserProvider;
 import org.example.stortiessearch.infrastructure.grpc.user.AuthenticatedUser;
-import org.example.stortiessearch.persistence.CommandPostRepository;
-import org.example.stortiessearch.persistence.model.PostEntity;
+import org.example.stortiessearch.infrastructure.persistence.CommandPostRepository;
+import org.example.stortiessearch.infrastructure.persistence.model.PostEntity;
 import org.example.stortiessearch.application.service.dto.request.CreatePostRequest;
 import org.springframework.stereotype.Service;
 

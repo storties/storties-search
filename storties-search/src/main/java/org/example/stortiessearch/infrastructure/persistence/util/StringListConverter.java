@@ -1,4 +1,4 @@
-package org.example.stortiessearch.persistence.util;
+package org.example.stortiessearch.infrastructure.persistence.util;
 
 import jakarta.persistence.AttributeConverter;
 import java.util.ArrayList;

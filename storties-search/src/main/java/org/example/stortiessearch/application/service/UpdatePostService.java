@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.service.dto.request.UpdatePostRequest;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
-import org.example.stortiessearch.persistence.model.PostEntity;
-import org.example.stortiessearch.persistence.repository.PostJpaRepository;
+import org.example.stortiessearch.infrastructure.persistence.model.PostEntity;
+import org.example.stortiessearch.infrastructure.persistence.repository.PostJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service

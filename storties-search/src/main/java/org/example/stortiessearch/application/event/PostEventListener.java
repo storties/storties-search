@@ -2,7 +2,7 @@ package org.example.stortiessearch.application.event;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.common.AuthenticatedUserProvider;
-import org.example.stortiessearch.persistence.CommandPostRepository;
+import org.example.stortiessearch.infrastructure.persistence.CommandPostRepository;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
