@@ -29,7 +29,7 @@ public class ExceptionFilter extends OncePerRequestFilter {
             if (cause instanceof StortiesException) {
                 errorToJson(((StortiesException) cause).getErrorProperty(), response);
             } else {
-                log.error("internal server error", e);
+                log.error(e.getMessage(), e);
                 errorToJson(ErrorCodes.INTERNAL_SERVER_ERROR, response);
             }
         }

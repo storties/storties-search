@@ -1,14 +1,17 @@
-package org.example.stortiessearch.persistence;
+package org.example.stortiessearch.persistence.model;
 
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.util.List;
 import org.example.stortiessearch.persistence.util.StringListConverter;
@@ -16,7 +19,10 @@ import org.example.stortiessearch.persistence.util.StringListConverter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+@Builder(toBuilder = true)
+@Getter
+@Table(name = "tbl_post")
+public class PostEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -43,4 +49,11 @@ public class Post {
 
     @Column(name = "is_published")
     private Boolean isPublished;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 }
