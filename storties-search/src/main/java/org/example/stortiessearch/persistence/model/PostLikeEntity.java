@@ -25,7 +25,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(
     name = "tbl_post_like",
     uniqueConstraints = {
-        @UniqueConstraint(name = "uk_post_id_user_id", columnNames = {"post_id", "user_id"})
+        @UniqueConstraint(name = "uk_like_post_id_user_id", columnNames = {"post_id", "user_id"})
     })
 public class PostLikeEntity {
 

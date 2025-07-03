@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.stortiessearch.application.event.PostViewEvent;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -23,11 +24,11 @@ import org.hibernate.annotations.OnDeleteAction;
 @Builder
 @Getter
 @Table(
-    name = "tbl_post_view_log",
+    name = "tbl_post_view",
     uniqueConstraints = {
-        @UniqueConstraint(name = "uk_post_id_user_id", columnNames = {"post_id", "user_id"})
+        @UniqueConstraint(name = "uk_view_post_id_user_id", columnNames = {"post_id", "user_id"})
     })
-public class PostViewLogEntity {
+public class PostViewEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
