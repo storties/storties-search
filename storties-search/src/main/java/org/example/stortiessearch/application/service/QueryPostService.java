@@ -6,7 +6,7 @@ import org.example.stortiessearch.application.event.PostViewEvent;
 import org.example.stortiessearch.common.AuthenticatedUserProvider;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.infrastructure.grpc.user.AuthenticatedUser;
-import org.example.stortiessearch.persistence.repository.PostJpaRepository;
+import org.example.stortiessearch.infrastructure.persistence.repository.PostJpaRepository;
 import org.example.stortiessearch.application.service.dto.response.PostResponse;
 import org.springframework.stereotype.Service;
 

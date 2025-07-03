@@ -1,4 +1,4 @@
-package org.example.stortiessearch.persistence.model;
+package org.example.stortiessearch.infrastructure.persistence.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

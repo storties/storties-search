@@ -1,11 +1,11 @@
-package org.example.stortiessearch.persistence;
+package org.example.stortiessearch.infrastructure.persistence;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
-import org.example.stortiessearch.persistence.model.PostEntity;
-import org.example.stortiessearch.persistence.model.PostLikeEntity;
-import org.example.stortiessearch.persistence.repository.PostJpaRepository;
+import org.example.stortiessearch.infrastructure.persistence.model.PostEntity;
+import org.example.stortiessearch.infrastructure.persistence.repository.PostJpaRepository;
+import org.example.stortiessearch.infrastructure.persistence.model.PostLikeEntity;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
