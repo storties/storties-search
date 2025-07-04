@@ -2,12 +2,14 @@ package org.example.stortiessearch.application.service;
 
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.common.AuthenticatedUserProvider;
+import org.example.stortiessearch.application.event.DeletePostEvent;
+import org.example.stortiessearch.infrastructure.mq.producer.DeletePostProducer;
+import org.example.stortiessearch.support.auth.AuthenticatedUserProvider;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
-import org.example.stortiessearch.infrastructure.grpc.user.AuthenticatedUser;
-import org.example.stortiessearch.infrastructure.persistence.CommandPostRepository;
-import org.example.stortiessearch.infrastructure.persistence.QueryPostRepository;
-import org.example.stortiessearch.infrastructure.persistence.model.PostEntity;
+import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
+import org.example.stortiessearch.data.persistence.CommandPostRepository;
+import org.example.stortiessearch.data.persistence.QueryPostRepository;
+import org.example.stortiessearch.data.persistence.model.PostEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +22,8 @@ public class DeletePostService {
 
     private final AuthenticatedUserProvider authenticatedUserProvider;
 
+    private final DeletePostProducer deletePostProducer;
+
     public void execute(Long postId) {
         PostEntity postEntity = queryPostRepository.queryPostById(postId);
         AuthenticatedUser authenticatedUser = authenticatedUserProvider.getAuthenticatedUser();
@@ -29,5 +33,7 @@ public class DeletePostService {
         }
 
         commandPostRepository.deletePostByPostId(postId);
+
+        deletePostProducer.publish(new DeletePostEvent(postEntity.getId()));
     }
 }

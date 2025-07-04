@@ -1,11 +1,11 @@
 package org.example.stortiessearch.application.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.common.AuthenticatedUserProvider;
-import org.example.stortiessearch.infrastructure.grpc.user.AuthenticatedUser;
-import org.example.stortiessearch.infrastructure.persistence.CommandPostRepository;
-import org.example.stortiessearch.infrastructure.persistence.QueryPostRepository;
-import org.example.stortiessearch.infrastructure.persistence.model.PostLikeEntity;
+import org.example.stortiessearch.support.auth.AuthenticatedUserProvider;
+import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
+import org.example.stortiessearch.data.persistence.CommandPostRepository;
+import org.example.stortiessearch.data.persistence.QueryPostRepository;
+import org.example.stortiessearch.data.persistence.model.PostLikeEntity;
 import org.springframework.stereotype.Component;
 
 @Component
