@@ -1,8 +1,8 @@
-package org.example.stortiessearch.common;
+package org.example.stortiessearch.support.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.infrastructure.grpc.user.AuthGrpcClient;
-import org.example.stortiessearch.infrastructure.grpc.user.AuthenticatedUser;
+import org.example.stortiessearch.infrastructure.client.grpc.user.AuthGrpcClient;
+import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 

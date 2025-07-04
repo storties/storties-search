@@ -1,4 +1,4 @@
-package org.example.stortiessearch.infrastructure.grpc.user;
+package org.example.stortiessearch.infrastructure.client.grpc.user.dto;
 
 import lombok.Builder;
 import storties.auth.grpc.AuthResponse;
