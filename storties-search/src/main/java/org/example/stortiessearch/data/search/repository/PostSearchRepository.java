@@ -1,6 +1,6 @@
-package org.example.stortiessearch.infrastructure.search.repository;
+package org.example.stortiessearch.data.search.repository;
 
-import org.example.stortiessearch.infrastructure.search.document.PostDocument;
+import org.example.stortiessearch.data.search.document.PostDocument;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 public interface PostSearchRepository extends ElasticsearchRepository<PostDocument, Long> {

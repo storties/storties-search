@@ -1,7 +1,9 @@
-package org.example.stortiessearch.infrastructure.search.document;
+package org.example.stortiessearch.data.search.document;
 
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -12,6 +14,8 @@ import java.util.List;
 @Document(indexName = "storties_post_index")
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
 public class PostDocument {
 
     @Id

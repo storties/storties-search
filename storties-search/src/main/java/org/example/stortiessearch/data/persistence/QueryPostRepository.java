@@ -1,11 +1,13 @@
-package org.example.stortiessearch.infrastructure.persistence;
+package org.example.stortiessearch.data.persistence;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.example.stortiessearch.data.persistence.model.PostEntity;
+import org.example.stortiessearch.data.persistence.model.PostLikeEntity;
+import org.example.stortiessearch.data.persistence.model.PostViewEntity;
+import org.example.stortiessearch.data.persistence.repository.PostJpaRepository;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
-import org.example.stortiessearch.infrastructure.persistence.model.PostEntity;
-import org.example.stortiessearch.infrastructure.persistence.repository.PostJpaRepository;
-import org.example.stortiessearch.infrastructure.persistence.model.PostLikeEntity;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
@@ -62,6 +64,14 @@ public class QueryPostRepository {
             .select(postLikeEntity)
             .from(postLikeEntity)
             .where(postLikeEntity.post.id.eq(postId).and(postLikeEntity.userId.eq(userId)))
+            .fetchOne();
+    }
+
+    public PostViewEntity queryViewByPostIdAndUserId(Long postId, Long userId) {
+        return queryFactory
+            .select(postViewLogEntity)
+            .from(postViewLogEntity)
+            .where(postViewLogEntity.post.id.eq(postId).and(postViewLogEntity.userId.eq(userId)))
             .fetchOne();
     }
 

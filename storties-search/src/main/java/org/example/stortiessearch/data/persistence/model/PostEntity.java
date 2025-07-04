@@ -1,4 +1,4 @@
-package org.example.stortiessearch.infrastructure.persistence.model;
+package org.example.stortiessearch.data.persistence.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -14,7 +14,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.util.List;
-import org.example.stortiessearch.infrastructure.persistence.util.StringListConverter;
+import org.example.stortiessearch.data.persistence.util.StringListConverter;
 
 @Entity
 @NoArgsConstructor

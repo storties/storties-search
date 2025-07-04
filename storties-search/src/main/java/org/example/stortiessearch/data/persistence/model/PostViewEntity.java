@@ -1,4 +1,4 @@
-package org.example.stortiessearch.infrastructure.persistence.model;
+package org.example.stortiessearch.data.persistence.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,11 +23,11 @@ import org.hibernate.annotations.OnDeleteAction;
 @Builder
 @Getter
 @Table(
-    name = "tbl_post_like",
+    name = "tbl_post_view",
     uniqueConstraints = {
-        @UniqueConstraint(name = "uk_like_post_id_user_id", columnNames = {"post_id", "user_id"})
+        @UniqueConstraint(name = "uk_view_post_id_user_id", columnNames = {"post_id", "user_id"})
     })
-public class PostLikeEntity {
+public class PostViewEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
