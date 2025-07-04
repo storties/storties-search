@@ -18,8 +18,11 @@ public enum ErrorCodes {
     POST_NOT_FOUND(ErrorStatus.NOT_FOUND, "게시물을 찾지 못했습니다.", 2),
 
     EMAIL_ALREADY_EXIST(ErrorStatus.CONFLICT, "이메일이 중복됩니다.", 1),
+    ALREADY_LIKED(ErrorStatus.CONFLICT, "이미 좋아요를 눌렀습니다.", 2),
 
-    INTERNAL_SERVER_ERROR(ErrorStatus.INTERNAL_SERVER_ERROR, "서버 에러", 1);
+    INTERNAL_SERVER_ERROR(ErrorStatus.INTERNAL_SERVER_ERROR, "서버 에러", 1),
+
+    CLIENT_CONNECT_FAILED(ErrorStatus.SERVICE_UNAVAILABLE, "서비스 통신 오류", 1);
 
     private final int status;
 
