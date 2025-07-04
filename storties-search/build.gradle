@@ -63,6 +63,12 @@ dependencies {
 
     // elastic search
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
+    // kafka
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // apache httpclient
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
 }
 
 protobuf {
