@@ -5,8 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 
 @Getter
-@RequiredArgsConstructor
 public class StortiesException extends RuntimeException{
 
-    private final ErrorCodes errorProperty;
+    private final ErrorCodes errorCodes;
+
+    public StortiesException(ErrorCodes errorCodes) {
+        super(errorCodes.getMessage());
+        this.errorCodes = errorCodes;
+    }
 }

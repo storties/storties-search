@@ -10,11 +10,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.global.exception.error.ErrorResponse;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
+@Component
 public class ExceptionFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper;
@@ -24,10 +28,13 @@ public class ExceptionFilter extends OncePerRequestFilter {
     ) throws IOException {
         try {
             filterChain.doFilter(request, response);
-        } catch (Exception e) {
+        } catch (StortiesException stortiesException) {
+            errorToJson(stortiesException.getErrorCodes(), response);
+        }
+        catch (Exception e) {
             Throwable cause = e.getCause();
             if (cause instanceof StortiesException) {
-                errorToJson(((StortiesException) cause).getErrorProperty(), response);
+                errorToJson(((StortiesException) cause).getErrorCodes(), response);
             } else {
                 log.error(e.getMessage(), e);
                 errorToJson(ErrorCodes.INTERNAL_SERVER_ERROR, response);
