@@ -28,7 +28,7 @@ public class DeletePostService {
         PostEntity postEntity = queryPostRepository.queryPostById(postId);
         AuthenticatedUser authenticatedUser = authenticatedUserProvider.getAuthenticatedUser();
 
-        if(!Objects.equals(authenticatedUser.userId(), postEntity.getId())) {
+        if(Objects.equals(authenticatedUser.userId(), postEntity.getId())) {
            throw ErrorCodes.POST_DELETE_FORBIDDEN.throwException();
         }
 
