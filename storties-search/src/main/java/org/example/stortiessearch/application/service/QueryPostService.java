@@ -1,12 +1,12 @@
 package org.example.stortiessearch.application.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.application.event.PostEventListener;
-import org.example.stortiessearch.application.event.PostViewEvent;
-import org.example.stortiessearch.common.AuthenticatedUserProvider;
+import org.example.stortiessearch.infrastructure.event.PostViewEventListener;
+import org.example.stortiessearch.application.event.IncreasePostViewEvent;
+import org.example.stortiessearch.support.auth.AuthenticatedUserProvider;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
-import org.example.stortiessearch.infrastructure.grpc.user.AuthenticatedUser;
-import org.example.stortiessearch.persistence.repository.PostJpaRepository;
+import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
+import org.example.stortiessearch.data.persistence.repository.PostJpaRepository;
 import org.example.stortiessearch.application.service.dto.response.PostResponse;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +16,13 @@ public class QueryPostService {
 
     private final PostJpaRepository postJpaRepository;
 
-    private final PostEventListener postEventListener;
+    private final PostViewEventListener postViewEventListener;
 
     private final AuthenticatedUserProvider authenticatedUserProvider;
 
     public PostResponse execute(Long postId) {
         AuthenticatedUser user = authenticatedUserProvider.getAuthenticatedUser();
-        postEventListener.handlePostViewEvent(new PostViewEvent(postId, user.userId()));
+        postViewEventListener.handlePostViewEvent(new IncreasePostViewEvent(postId, user.userId()));
 
         return PostResponse.from(postJpaRepository.findById(postId)
             .orElseThrow(ErrorCodes.POST_NOT_FOUND::throwException));

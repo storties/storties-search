@@ -3,7 +3,8 @@ package org.example.stortiessearch.global.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.global.authentication.JwtAuthenticationFilter;
-import org.example.stortiessearch.global.authentication.JwtTokenParser;
+import org.example.stortiessearch.global.authentication.JwtParser;
+import org.example.stortiessearch.global.authentication.type.Role;
 import org.example.stortiessearch.global.exception.ExceptionFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtTokenParser jwtTokenParser;
+    private final ExceptionFilter exceptionFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -29,19 +31,16 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                    .anyRequest().permitAll()
+                .requestMatchers("/posts/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                .requestMatchers("/posts").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
             )
-            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenParser), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(exceptionFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
-    }
-
-    @Bean
-    public ExceptionFilter exceptionFilter() {
-        return new ExceptionFilter(new ObjectMapper());
     }
 }

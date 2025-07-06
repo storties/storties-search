@@ -20,4 +20,6 @@ public class ErrorStatus {
     public static final int TOO_MANY_REQUEST = 429;
 
     public static final int INTERNAL_SERVER_ERROR = 500;
+
+    public static final int SERVICE_UNAVAILABLE = 503;
 }

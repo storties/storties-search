@@ -36,6 +36,8 @@ dependencies {
 
     // postgresql
     runtimeOnly 'org.postgresql:postgresql'
+    implementation("com.vladmihalcea:hibernate-types-60:2.21.1") // Hibernate 6 버전용
+
 
     // queryDSL
     implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
@@ -60,6 +62,15 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // elastic search
+    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
+    // kafka
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // jackson
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 }
 
 protobuf {
@@ -87,9 +98,4 @@ sourceSets {
             srcDirs += 'build/generated/source/proto/main/grpc'
         }
     }
-}
-
-
-tasks.named('test') {
-    useJUnitPlatform()
 }
