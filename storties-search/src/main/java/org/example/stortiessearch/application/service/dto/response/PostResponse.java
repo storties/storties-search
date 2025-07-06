@@ -1,6 +1,7 @@
 package org.example.stortiessearch.application.service.dto.response;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class PostResponse {
             .title(postEntity.getTitle())
             .content(postEntity.getContent())
             .isPublished(postEntity.getIsPublished())
-            .tags(postEntity.getTags())
+            .tags(new ArrayList<>(postEntity.getTags()))
             .createdAt(postEntity.getCreatedAt())
             .updatedAt(postEntity.getUpdatedAt())
             .build();
