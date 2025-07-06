@@ -12,19 +12,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-@Component
 @RequiredArgsConstructor
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtTokenParser jwtTokenParser;
+    private final JwtParser jwtParser;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
         String token = resolveToken(request);
-        if (token != null && jwtTokenParser.validateAccessToken(token)) {
-            Authentication auth = jwtTokenParser.getAuthentication(token);
+        jwtParser.validateAccessToken(token);
+        if (token != null) {
+            Authentication auth = jwtParser.getAuthentication(token);
 
             SecurityContext context = SecurityContextHolder.createEmptyContext();
             context.setAuthentication(auth);

@@ -9,10 +9,12 @@ import org.springframework.boot.web.error.Error;
 @AllArgsConstructor
 public enum ErrorCodes {
 
-    PASSWORD_MISMATCH(ErrorStatus.UNAUTHORIZED, "비밀번호가 일치되지 않습니다.", 1),
+    PASSWORD_MISMATCH(ErrorStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.", 1),
     TOKEN_EXPIRED(ErrorStatus.UNAUTHORIZED, "토큰이 만료되었습니다.", 2),
+    INVALID_TOKEN(ErrorStatus.UNAUTHORIZED, "유효하지 않은 토큰 입니다.", 3),
 
     POST_DELETE_FORBIDDEN(ErrorStatus.FORBIDDEN, "삭제 권한이 없습니다.", 1),
+    POST_UPDATE_FORBIDDEN(ErrorStatus.FORBIDDEN, "수정 권한이 없습니다.", 1),
 
     USER_NOT_FOUND(ErrorStatus.NOT_FOUND, "유저를 찾지 못했습니다.", 1),
     POST_NOT_FOUND(ErrorStatus.NOT_FOUND, "게시물을 찾지 못했습니다.", 2),
