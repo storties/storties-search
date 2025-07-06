@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class DeleteLikeService {
+public class UnLikeService {
 
     private final AuthenticatedUserProvider authenticatedUserProvider;
 
