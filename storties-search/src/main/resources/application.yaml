@@ -1,13 +1,21 @@
 server:
   port: 8081
 spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    uris: ${ELASTIC_URI}
+    username: ${ELASTIC_USERNAME}
+    password: ${ELASTIC_PASSWORD}
   datasource:
     url: jdbc:postgresql://${DB_URL}:5432/${DB_NAME}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show_sql: true
     open-in-view: false
   kafka:
@@ -19,10 +27,19 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
 grpc:
   server:
+    security:
+      enabled: false
     port: 9091
   client:
     auth-service:
       address: static://localhost:9090
       negotiationType: plaintext
+jwt:
+  secret: Vh1wv1fy8OrEhxLnpy4ui5oyiu4i9t8uy898589yihbi9uy48fdsduw7223ufo9y9yafG7wH7J #${JWT_SECRET_KEY}
+  access-token-expiration: 18000000
+  refresh-token-expiration: 1209600
