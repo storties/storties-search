@@ -5,7 +5,7 @@ public class KafkaProperties {
 
     public static final String UPDATE_TOPIC = "update-post";
 
-    public static final String CREATE_TOPIC = "crate-post";
+    public static final String CREATE_TOPIC = "create-post";
 
     public static final String GROUP_ID = "post-group";
 

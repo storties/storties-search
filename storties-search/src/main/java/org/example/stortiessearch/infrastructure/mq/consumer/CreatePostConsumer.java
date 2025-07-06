@@ -5,7 +5,6 @@ import org.example.stortiessearch.application.event.CreatePostEvent;
 import org.example.stortiessearch.data.search.document.PostDocument;
 import org.example.stortiessearch.data.search.repository.PostSearchRepository;
 import org.example.stortiessearch.infrastructure.client.rest.VectorRestClient;
-import org.example.stortiessearch.infrastructure.mq.KafkaProperties;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;

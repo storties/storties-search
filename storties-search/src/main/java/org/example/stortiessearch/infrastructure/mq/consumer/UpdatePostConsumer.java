@@ -40,7 +40,7 @@ public class UpdatePostConsumer {
 
             String documentId = String.valueOf(postDocument.getId());
 
-            // title or content 변경됐으면 저장
+            // title or content 변경될 시 벡터 변경
             if(!event.getTitle().equals(postDocument.getTitle()) || !event.getContent().equals(postDocument.getContent())) {
                 float[] vector = vectorRestClient.generateVector(documentId, event.getTitle(), event.getContent());
                 esPostUpdateUseCase.updateVector(KafkaProperties.INDEX_NAME, documentId, vector);
