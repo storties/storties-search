@@ -1,20 +1,25 @@
 package org.example.stortiessearch.data.persistence.model;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
-import org.example.stortiessearch.data.persistence.util.StringListConverter;
+import org.hibernate.annotations.BatchSize;
 
 @Entity
 @NoArgsConstructor
@@ -37,9 +42,11 @@ public class PostEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "tags", columnDefinition = "text[]")
-    @Convert(converter = StringListConverter.class)
-    private List<String> tags;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "post_tags", joinColumns = @JoinColumn(name = "post_id"))
+    @Column(name = "tag")
+    @BatchSize(size = 100)
+    private List<String> tags = new ArrayList<>();
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

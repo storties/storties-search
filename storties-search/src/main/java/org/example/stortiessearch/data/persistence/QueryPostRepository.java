@@ -1,7 +1,6 @@
 package org.example.stortiessearch.data.persistence;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.data.persistence.model.PostEntity;
 import org.example.stortiessearch.data.persistence.model.PostLikeEntity;
@@ -11,9 +10,9 @@ import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
-import static org.example.stortiessearch.persistence.model.QPostEntity.postEntity;
-import static org.example.stortiessearch.persistence.model.QPostLikeEntity.postLikeEntity;
-import static org.example.stortiessearch.persistence.model.QPostViewLogEntity.postViewLogEntity;
+import static org.example.stortiessearch.data.persistence.model.QPostEntity.postEntity;
+import static org.example.stortiessearch.data.persistence.model.QPostLikeEntity.postLikeEntity;
+import static org.example.stortiessearch.data.persistence.model.QPostViewEntity.postViewEntity;
 
 @Component
 @RequiredArgsConstructor
@@ -36,17 +35,17 @@ public class QueryPostRepository {
         return queryFactory
             .select(postEntity)
             .from(postEntity)
-            .offset((page-1) * 10)
+            .offset(page * 10)
             .limit(10)
             .fetch();
     }
 
     public Long queryViewCount(Long postId) {
         return queryFactory
-            .select(postViewLogEntity.count())
-            .from(postViewLogEntity)
-            .groupBy(postViewLogEntity.post.id)
-            .where(postViewLogEntity.post.id.eq(postId))
+            .select(postViewEntity.count())
+            .from(postViewEntity)
+            .groupBy(postViewEntity.post.id)
+            .where(postViewEntity.post.id.eq(postId))
             .fetchOne();
     }
 
@@ -69,9 +68,9 @@ public class QueryPostRepository {
 
     public PostViewEntity queryViewByPostIdAndUserId(Long postId, Long userId) {
         return queryFactory
-            .select(postViewLogEntity)
-            .from(postViewLogEntity)
-            .where(postViewLogEntity.post.id.eq(postId).and(postViewLogEntity.userId.eq(userId)))
+            .select(postViewEntity)
+            .from(postViewEntity)
+            .where(postViewEntity.post.id.eq(postId).and(postViewEntity.userId.eq(userId)))
             .fetchOne();
     }
 
