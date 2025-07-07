@@ -3,8 +3,8 @@ package org.example.stortiessearch.infrastructure.mq.consumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.stortiessearch.application.event.UpdatePostEvent;
-import org.example.stortiessearch.data.search.document.PostDocument;
-import org.example.stortiessearch.data.search.repository.PostSearchRepository;
+import org.example.stortiessearch.data.search.post.document.PostDocument;
+import org.example.stortiessearch.data.search.post.repository.PostSearchRepository;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.infrastructure.client.rest.VectorRestClient;
 import org.example.stortiessearch.infrastructure.mq.KafkaProperties;
@@ -42,7 +42,7 @@ public class UpdatePostConsumer {
 
             // title or content 변경될 시 벡터 변경
             if(!event.getTitle().equals(postDocument.getTitle()) || !event.getContent().equals(postDocument.getContent())) {
-                float[] vector = vectorRestClient.generateVector(documentId, event.getTitle(), event.getContent());
+                float[] vector = vectorRestClient.generateVector(event.getTitle() + event.getContent());
                 esPostUpdateUseCase.updateVector(KafkaProperties.INDEX_NAME, documentId, vector);
             }
 

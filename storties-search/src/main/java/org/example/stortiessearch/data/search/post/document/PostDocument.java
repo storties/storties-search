@@ -1,4 +1,4 @@
-package org.example.stortiessearch.data.search.document;
+package org.example.stortiessearch.data.search.post.document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Id;
@@ -27,6 +27,9 @@ public class PostDocument {
 
     @Field(type = FieldType.Keyword)
     private Long userId;
+
+    @Field(type = FieldType.Keyword)
+    private String centroidId;
 
     @Field(type = FieldType.Text)
     private String title;

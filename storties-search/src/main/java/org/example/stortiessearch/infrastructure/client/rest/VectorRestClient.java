@@ -1,7 +1,6 @@
 package org.example.stortiessearch.infrastructure.client.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +27,9 @@ public class VectorRestClient {
 
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
-
-    public float[] generateVector(String postId, String postTitle, String postContent) {
+    public float[] generateVector(String input) {
         try {
-            Map<String, String> requestBody = Map.of("sentence", postTitle + postContent);
+            Map<String, String> requestBody = Map.of("sentence", input);
             String jsonBody = objectMapper.writeValueAsString(requestBody);
 
             HttpUriRequest request = RequestBuilder.post(URL)
@@ -46,7 +44,7 @@ public class VectorRestClient {
                 VectorResponse vectorResponse = objectMapper.readValue(json, VectorResponse.class);
                 float[] vector = vectorResponse.getVector();
 
-                log.info("Vector successfully generated." + postId);
+                log.info("Vector successfully generated.");
 
                 return vector;
             }
