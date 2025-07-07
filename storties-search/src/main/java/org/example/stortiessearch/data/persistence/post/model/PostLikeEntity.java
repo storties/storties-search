@@ -1,4 +1,4 @@
-package org.example.stortiessearch.data.persistence.model;
+package org.example.stortiessearch.data.persistence.post.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,6 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -24,6 +25,9 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @Table(
     name = "tbl_post_like",
+    indexes = {
+        @Index(name = "idx_like_log_post_id", columnList = "post_id")
+    },
     uniqueConstraints = {
         @UniqueConstraint(name = "uk_like_post_id_user_id", columnNames = {"post_id", "user_id"})
     })

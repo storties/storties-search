@@ -1,4 +1,4 @@
-package org.example.stortiessearch.data.persistence.model;
+package org.example.stortiessearch.data.persistence.post.model;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;

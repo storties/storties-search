@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
-import org.example.stortiessearch.data.persistence.model.PostEntity;
+import org.example.stortiessearch.data.persistence.post.model.PostEntity;
 
 @Getter
 @Builder
