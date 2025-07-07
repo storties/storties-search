@@ -1,4 +1,4 @@
-package org.example.stortiessearch.support.elastic;
+package org.example.stortiessearch.infrastructure.search.support;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

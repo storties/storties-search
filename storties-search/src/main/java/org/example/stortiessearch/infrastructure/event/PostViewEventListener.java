@@ -1,7 +1,7 @@
 package org.example.stortiessearch.infrastructure.event;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.support.auth.AuthenticatedUserProvider;
+import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.example.stortiessearch.application.event.IncreasePostViewEvent;
 import org.example.stortiessearch.data.persistence.CommandPostRepository;
 import org.springframework.context.event.EventListener;

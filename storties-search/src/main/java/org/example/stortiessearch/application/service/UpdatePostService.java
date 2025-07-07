@@ -10,7 +10,7 @@ import org.example.stortiessearch.data.persistence.model.PostEntity;
 import org.example.stortiessearch.data.persistence.repository.PostJpaRepository;
 import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
 import org.example.stortiessearch.infrastructure.mq.producer.UpdatePostProducer;
-import org.example.stortiessearch.support.auth.AuthenticatedUserProvider;
+import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.springframework.stereotype.Service;
 
 @Service

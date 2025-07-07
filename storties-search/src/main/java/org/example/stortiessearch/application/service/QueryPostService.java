@@ -3,7 +3,7 @@ package org.example.stortiessearch.application.service;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.infrastructure.event.PostViewEventListener;
 import org.example.stortiessearch.application.event.IncreasePostViewEvent;
-import org.example.stortiessearch.support.auth.AuthenticatedUserProvider;
+import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
 import org.example.stortiessearch.data.persistence.repository.PostJpaRepository;

@@ -13,6 +13,7 @@ import static org.example.stortiessearch.infrastructure.mq.KafkaProperties.CONTA
 import static org.example.stortiessearch.infrastructure.mq.KafkaProperties.CREATE_TOPIC;
 import static org.example.stortiessearch.infrastructure.mq.KafkaProperties.GROUP_ID;
 
+// todo PostgreSQL랑 원자성 보장
 @Component
 @RequiredArgsConstructor
 public class CreatePostConsumer {

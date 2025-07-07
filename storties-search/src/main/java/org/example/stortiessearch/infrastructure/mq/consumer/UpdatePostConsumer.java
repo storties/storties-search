@@ -8,7 +8,7 @@ import org.example.stortiessearch.data.search.repository.PostSearchRepository;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.infrastructure.client.rest.VectorRestClient;
 import org.example.stortiessearch.infrastructure.mq.KafkaProperties;
-import org.example.stortiessearch.support.elastic.ESPostUpdateUseCase;
+import org.example.stortiessearch.infrastructure.search.support.ESPostUpdateUseCase;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
