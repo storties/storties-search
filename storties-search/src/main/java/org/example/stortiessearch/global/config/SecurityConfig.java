@@ -1,9 +1,7 @@
 package org.example.stortiessearch.global.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.global.authentication.JwtAuthenticationFilter;
-import org.example.stortiessearch.global.authentication.JwtParser;
 import org.example.stortiessearch.global.authentication.type.Role;
 import org.example.stortiessearch.global.exception.ExceptionFilter;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +32,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/posts/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                 .requestMatchers("/posts").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                .requestMatchers("/test/**").permitAll()
             )
             .addFilterBefore(exceptionFilter, UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
