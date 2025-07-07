@@ -1,4 +1,4 @@
-package org.example.stortiessearch.support.auth;
+package org.example.stortiessearch.global.authentication;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.infrastructure.client.grpc.user.AuthGrpcClient;

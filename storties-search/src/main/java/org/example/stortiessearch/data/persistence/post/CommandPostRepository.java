@@ -1,13 +1,13 @@
-package org.example.stortiessearch.data.persistence;
+package org.example.stortiessearch.data.persistence.post;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.data.persistence.model.PostLikeEntity;
-import org.example.stortiessearch.data.persistence.model.PostViewEntity;
+import org.example.stortiessearch.data.persistence.post.model.PostLikeEntity;
+import org.example.stortiessearch.data.persistence.post.model.PostViewEntity;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
-import org.example.stortiessearch.data.persistence.model.PostEntity;
-import org.example.stortiessearch.data.persistence.repository.PostJpaRepository;
-import org.example.stortiessearch.data.persistence.repository.PostLikeJpaRepository;
-import org.example.stortiessearch.data.persistence.repository.PostViewLogJpaRepository;
+import org.example.stortiessearch.data.persistence.post.model.PostEntity;
+import org.example.stortiessearch.data.persistence.post.repository.PostJpaRepository;
+import org.example.stortiessearch.data.persistence.post.repository.PostLikeJpaRepository;
+import org.example.stortiessearch.data.persistence.post.repository.PostViewLogJpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component

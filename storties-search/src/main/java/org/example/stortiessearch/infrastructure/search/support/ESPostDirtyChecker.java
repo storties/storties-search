@@ -1,4 +1,4 @@
-package org.example.stortiessearch.support.elastic;
+package org.example.stortiessearch.infrastructure.search.support;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import org.example.stortiessearch.application.event.UpdatePostEvent;
-import org.example.stortiessearch.data.search.document.PostDocument;
+import org.example.stortiessearch.data.search.post.document.PostDocument;
 
 public class ESPostDirtyChecker {
 

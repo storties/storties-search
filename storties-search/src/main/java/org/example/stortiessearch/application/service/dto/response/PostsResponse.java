@@ -3,7 +3,7 @@ package org.example.stortiessearch.application.service.dto.response;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.example.stortiessearch.data.persistence.model.PostEntity;
+import org.example.stortiessearch.data.persistence.post.model.PostEntity;
 
 @Getter
 @AllArgsConstructor

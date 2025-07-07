@@ -1,4 +1,4 @@
-package org.example.stortiessearch.support.elastic;
+package org.example.stortiessearch.infrastructure.search.support;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.stortiessearch.application.event.UpdatePostEvent;
-import org.example.stortiessearch.data.search.document.PostDocument;
+import org.example.stortiessearch.data.search.post.document.PostDocument;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.document.Document;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;

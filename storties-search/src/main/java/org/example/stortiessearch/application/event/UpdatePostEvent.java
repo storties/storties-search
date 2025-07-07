@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.stortiessearch.data.persistence.model.PostEntity;
+import org.example.stortiessearch.data.persistence.post.model.PostEntity;
 
 @Getter
 @NoArgsConstructor
