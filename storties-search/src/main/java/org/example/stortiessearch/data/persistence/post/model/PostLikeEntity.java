@@ -9,8 +9,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,4 +46,14 @@ public class PostLikeEntity {
 
     @Column(name = "user_id")
     private Long userId;
+
+    @Column(name = "liked_at")
+    private LocalDateTime likedAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (likedAt == null) {
+            this.likedAt = LocalDateTime.now();
+        }
+    }
 }
