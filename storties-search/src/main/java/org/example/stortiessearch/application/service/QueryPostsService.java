@@ -15,6 +15,6 @@ public class QueryPostsService {
 
     public PostsResponse execute(int page) {
 
-        return PostsResponse.from(queryPostRepository.queryPostWithPaging(page));
+        return null;//PostsResponse.from(queryPostRepository.queryPostWithPaging(page));
     }
 }
