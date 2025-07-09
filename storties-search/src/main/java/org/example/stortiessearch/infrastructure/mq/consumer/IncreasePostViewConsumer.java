@@ -4,7 +4,6 @@ import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.IncreasePostViewEvent;
 import org.example.stortiessearch.data.persistence.post.CommandPostRepository;
-import org.example.stortiessearch.data.persistence.post.QueryPostRepository;
 import org.example.stortiessearch.infrastructure.mq.KafkaProperties;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -19,8 +18,6 @@ public class IncreasePostViewConsumer {
     private final RedisTemplate<String, String> redisTemplate;
 
     private final CommandPostRepository commandPostRepository;
-
-    private final QueryPostRepository queryPostRepository;
 
     private static final Duration TTL = Duration.ofHours(5);
 

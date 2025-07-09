@@ -19,7 +19,6 @@ public class UnLikeService {
 
     public void execute(Long postId) {
         Long userId = authenticatedUserProvider.getCurrentUserId();
-
         queryPostRepository.queryPostById(postId);
 
         decreasePostLikeProducer.publish(DecreasePostLikeEvent
