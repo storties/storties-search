@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-public class PostDocument {
+public class PostDocument { // todo infrastructure 로 이전하자
 
     @Id
     @Field(type = FieldType.Keyword)

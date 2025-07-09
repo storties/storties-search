@@ -49,7 +49,7 @@ public class PostLikeEntity {
 
     @Column(name = "liked_at")
     private LocalDateTime likedAt;
-    
+
     @PrePersist
     public void prePersist() {
         if (likedAt == null) {
