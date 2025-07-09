@@ -75,6 +75,11 @@ public class ESPostSearchQuery {
     }
 
     public List<PostDocument> searchByKNN(String input) {
+
+        if(input == null|| input.isEmpty()) {
+            return List.of();
+        }
+
         float[] vector = vectorRestClient.generateVector(input);
 
         List<Float> vectorList = new ArrayList<>(vector.length);
