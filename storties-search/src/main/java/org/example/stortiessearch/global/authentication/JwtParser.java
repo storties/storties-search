@@ -46,7 +46,11 @@ public class JwtParser {
     }
 
     public Long getId(String accessToken) {
-        return Long.valueOf(getClaims(accessToken).getSubject());
+        try {
+            return Long.valueOf(getClaims(accessToken).getSubject());
+        } catch (Exception e) {
+            throw ErrorCodes.INVALID_TOKEN.throwException();
+        }
     }
 
     /**
@@ -73,6 +77,5 @@ public class JwtParser {
         } catch (Exception e) {
             throw ErrorCodes.INVALID_TOKEN.throwException();
         }
-
     }
 }

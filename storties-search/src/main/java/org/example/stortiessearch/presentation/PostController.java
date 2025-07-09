@@ -10,16 +10,14 @@ import org.example.stortiessearch.application.service.UnLikeService;
 import org.example.stortiessearch.application.service.UpdatePostService;
 import org.example.stortiessearch.application.service.dto.request.CreatePostRequest;
 import org.example.stortiessearch.application.service.dto.request.UpdatePostRequest;
-import org.example.stortiessearch.application.service.dto.response.PostResponse;
+import org.example.stortiessearch.application.service.dto.response.PostDetailResponse;
 import org.example.stortiessearch.application.service.dto.response.PostsResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,9 +44,9 @@ public class PostController {
     private final UpdatePostService updatePostService;
 
     // 게시물 단건 조회 (조회수 증가 포함)
-    @GetMapping("/{postId}")
+    @GetMapping("/{post_id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public PostResponse getPost(@PathVariable Long postId) {
+    public PostDetailResponse getPost(@PathVariable("post_id") Long postId) {
         return queryPostService.execute(postId);
     }
 

@@ -1,11 +1,10 @@
 package org.example.stortiessearch.application.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.support.auth.AuthenticatedUserProvider;
-import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
-import org.example.stortiessearch.data.persistence.CommandPostRepository;
-import org.example.stortiessearch.data.persistence.QueryPostRepository;
-import org.example.stortiessearch.data.persistence.model.PostLikeEntity;
+import org.example.stortiessearch.application.event.DecreasePostLikeEvent;
+import org.example.stortiessearch.data.persistence.post.QueryPostRepository;
+import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
+import org.example.stortiessearch.infrastructure.mq.producer.DecreasePostLikeProducer;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,15 +13,18 @@ public class UnLikeService {
 
     private final AuthenticatedUserProvider authenticatedUserProvider;
 
-    private final CommandPostRepository commandPostRepository;
+    private final DecreasePostLikeProducer decreasePostLikeProducer;
 
     private final QueryPostRepository queryPostRepository;
 
     public void execute(Long postId) {
-        AuthenticatedUser user = authenticatedUserProvider.getAuthenticatedUser();
+        Long userId = authenticatedUserProvider.getCurrentUserId();
         queryPostRepository.queryPostById(postId);
-        PostLikeEntity postLikeEntity = queryPostRepository.queryLikeByPostIdAndUserId(postId, user.userId());
 
-        commandPostRepository.deleteLikeById(postLikeEntity.getId());
+        decreasePostLikeProducer.publish(DecreasePostLikeEvent
+            .builder()
+            .postId(postId)
+            .userId(userId)
+            .build());
     }
 }

@@ -6,11 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.UpdatePostEvent;
 import org.example.stortiessearch.application.service.dto.request.UpdatePostRequest;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
-import org.example.stortiessearch.data.persistence.model.PostEntity;
-import org.example.stortiessearch.data.persistence.repository.PostJpaRepository;
+import org.example.stortiessearch.data.persistence.post.model.PostEntity;
+import org.example.stortiessearch.data.persistence.post.repository.PostJpaRepository;
 import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
 import org.example.stortiessearch.infrastructure.mq.producer.UpdatePostProducer;
-import org.example.stortiessearch.support.auth.AuthenticatedUserProvider;
+import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.springframework.stereotype.Service;
 
 @Service

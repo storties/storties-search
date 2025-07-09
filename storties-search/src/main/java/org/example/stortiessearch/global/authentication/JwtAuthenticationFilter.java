@@ -23,8 +23,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String token = resolveToken(request);
-        jwtParser.validateAccessToken(token);
         if (token != null) {
+            jwtParser.validateAccessToken(token);
             Authentication auth = jwtParser.getAuthentication(token);
 
             SecurityContext context = SecurityContextHolder.createEmptyContext();

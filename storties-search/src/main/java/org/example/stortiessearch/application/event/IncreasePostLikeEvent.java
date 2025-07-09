@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IncreasePostViewEvent {
+public class IncreasePostLikeEvent {
 
     private Long postId;
 
