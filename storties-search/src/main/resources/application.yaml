@@ -2,6 +2,11 @@ server:
   port: 8081
 spring:
   data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 1
     elasticsearch:
       repositories:
         enabled: true
@@ -15,7 +20,7 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show_sql: true
     open-in-view: false
   kafka:
