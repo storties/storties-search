@@ -4,7 +4,7 @@ import co.elastic.clients.elasticsearch._types.FieldValue;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.data.search.post.document.PostDocument;
+import org.example.stortiessearch.infrastructure.search.domain.post.document.PostDocument;
 import org.example.stortiessearch.infrastructure.client.rest.VectorRestClient;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import java.util.List;

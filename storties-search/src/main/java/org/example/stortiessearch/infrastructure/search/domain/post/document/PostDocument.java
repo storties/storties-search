@@ -1,4 +1,4 @@
-package org.example.stortiessearch.data.search.post.document;
+package org.example.stortiessearch.infrastructure.search.domain.post.document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Id;

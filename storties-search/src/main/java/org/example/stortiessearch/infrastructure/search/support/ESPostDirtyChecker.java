@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import org.example.stortiessearch.application.event.UpdatePostEvent;
-import org.example.stortiessearch.data.search.post.document.PostDocument;
+import org.example.stortiessearch.infrastructure.search.domain.post.document.PostDocument;
 
 public class ESPostDirtyChecker {
 
