@@ -2,8 +2,8 @@ package org.example.stortiessearch.infrastructure.mq.consumer;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.CreatePostEvent;
-import org.example.stortiessearch.data.search.post.document.PostDocument;
-import org.example.stortiessearch.data.search.post.repository.PostSearchRepository;
+import org.example.stortiessearch.infrastructure.search.domain.post.document.PostDocument;
+import org.example.stortiessearch.infrastructure.search.domain.post.repository.PostSearchRepository;
 import org.example.stortiessearch.infrastructure.client.rest.VectorRestClient;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;

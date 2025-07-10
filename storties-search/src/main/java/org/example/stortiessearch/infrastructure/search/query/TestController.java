@@ -1,7 +1,7 @@
 package org.example.stortiessearch.infrastructure.search.query;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.data.search.post.document.PostDocument;
+import org.example.stortiessearch.infrastructure.search.domain.post.document.PostDocument;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
