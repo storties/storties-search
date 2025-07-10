@@ -3,7 +3,7 @@ package org.example.stortiessearch.infrastructure.mq.consumer;
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.IncreasePostViewEvent;
-import org.example.stortiessearch.data.persistence.post.CommandPostRepository;
+import org.example.stortiessearch.domain.post.CommandPostRepository;
 import org.example.stortiessearch.infrastructure.mq.KafkaProperties;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;

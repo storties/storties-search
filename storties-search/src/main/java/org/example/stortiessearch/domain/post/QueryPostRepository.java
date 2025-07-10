@@ -1,18 +1,18 @@
-package org.example.stortiessearch.data.persistence.post;
+package org.example.stortiessearch.domain.post;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.data.persistence.post.model.PostEntity;
-import org.example.stortiessearch.data.persistence.post.model.PostLikeEntity;
-import org.example.stortiessearch.data.persistence.post.model.PostViewEntity;
-import org.example.stortiessearch.data.persistence.post.repository.PostJpaRepository;
+import org.example.stortiessearch.domain.post.model.PostEntity;
+import org.example.stortiessearch.domain.post.model.PostLikeEntity;
+import org.example.stortiessearch.domain.post.model.PostViewEntity;
+import org.example.stortiessearch.domain.post.repository.PostJpaRepository;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
-import static org.example.stortiessearch.data.persistence.post.model.QPostEntity.postEntity;
-import static org.example.stortiessearch.data.persistence.post.model.QPostLikeEntity.postLikeEntity;
-import static org.example.stortiessearch.data.persistence.post.model.QPostViewEntity.postViewEntity;
+import static org.example.stortiessearch.domain.persistence.post.model.QPostEntity.postEntity;
+import static org.example.stortiessearch.domain.persistence.post.model.QPostLikeEntity.postLikeEntity;
+import static org.example.stortiessearch.domain.persistence.post.model.QPostViewEntity.postViewEntity;
 
 @Component
 @RequiredArgsConstructor

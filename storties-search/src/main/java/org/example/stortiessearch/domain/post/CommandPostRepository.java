@@ -1,13 +1,13 @@
-package org.example.stortiessearch.data.persistence.post;
+package org.example.stortiessearch.domain.post;
 
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.data.persistence.post.model.PostLikeEntity;
-import org.example.stortiessearch.data.persistence.post.model.PostViewEntity;
+import org.example.stortiessearch.domain.post.model.PostLikeEntity;
+import org.example.stortiessearch.domain.post.model.PostViewEntity;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
-import org.example.stortiessearch.data.persistence.post.model.PostEntity;
-import org.example.stortiessearch.data.persistence.post.repository.PostJpaRepository;
-import org.example.stortiessearch.data.persistence.post.repository.PostLikeJpaRepository;
-import org.example.stortiessearch.data.persistence.post.repository.PostViewJpaRepository;
+import org.example.stortiessearch.domain.post.model.PostEntity;
+import org.example.stortiessearch.domain.post.repository.PostJpaRepository;
+import org.example.stortiessearch.domain.post.repository.PostLikeJpaRepository;
+import org.example.stortiessearch.domain.post.repository.PostViewJpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component // todo 쿼리 부분만 인프라로

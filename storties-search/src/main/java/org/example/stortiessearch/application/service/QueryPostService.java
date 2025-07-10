@@ -2,12 +2,12 @@ package org.example.stortiessearch.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.IncreasePostViewEvent;
-import org.example.stortiessearch.data.persistence.post.model.PostEntity;
+import org.example.stortiessearch.domain.post.model.PostEntity;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.infrastructure.cache.service.GetLikeCountService;
 import org.example.stortiessearch.infrastructure.cache.service.GetViewCountService;
-import org.example.stortiessearch.data.persistence.post.repository.PostJpaRepository;
+import org.example.stortiessearch.domain.post.repository.PostJpaRepository;
 import org.example.stortiessearch.application.service.dto.response.PostDetailResponse;
 import org.example.stortiessearch.infrastructure.mq.producer.IncreasePostViewProducer;
 import org.springframework.stereotype.Service;

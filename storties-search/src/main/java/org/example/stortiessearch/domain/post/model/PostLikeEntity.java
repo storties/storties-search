@@ -1,4 +1,4 @@
-package org.example.stortiessearch.data.persistence.post.model;
+package org.example.stortiessearch.domain.post.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,12 +26,14 @@ import org.hibernate.annotations.OnDeleteAction;
 @Builder
 @Getter
 @Table(
-    name = "tbl_post_view",
+    name = "tbl_post_like",
     indexes = {
-        @Index(name = "idx_view_post_id", columnList = "post_id")
-    }
-)
-public class PostViewEntity {
+        @Index(name = "idx_like_log_post_id", columnList = "post_id")
+    },
+    uniqueConstraints = {
+        @UniqueConstraint(name = "uk_like_post_id_user_id", columnNames = {"post_id", "user_id"})
+    })
+public class PostLikeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -45,13 +47,13 @@ public class PostViewEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "viewed_at")
-    private LocalDateTime viewedAt;
+    @Column(name = "liked_at")
+    private LocalDateTime likedAt;
 
     @PrePersist
     public void prePersist() {
-        if (viewedAt == null) {
-            this.viewedAt = LocalDateTime.now();
+        if (likedAt == null) {
+            this.likedAt = LocalDateTime.now();
         }
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.example.stortiessearch.data.persistence.post.model.PostEntity;
+import org.example.stortiessearch.domain.post.model.PostEntity;
 import org.example.stortiessearch.infrastructure.search.domain.post.document.PostDocument;
 
 @Getter

@@ -2,9 +2,9 @@ package org.example.stortiessearch.infrastructure.mq.consumer;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.DecreasePostLikeEvent;
-import org.example.stortiessearch.data.persistence.post.CommandPostRepository;
-import org.example.stortiessearch.data.persistence.post.QueryPostRepository;
-import org.example.stortiessearch.data.persistence.post.model.PostLikeEntity;
+import org.example.stortiessearch.domain.post.CommandPostRepository;
+import org.example.stortiessearch.domain.post.QueryPostRepository;
+import org.example.stortiessearch.domain.post.model.PostLikeEntity;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
