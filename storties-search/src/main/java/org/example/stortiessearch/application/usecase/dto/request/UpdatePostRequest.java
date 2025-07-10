@@ -1,4 +1,4 @@
-package org.example.stortiessearch.application.service.dto.request;
+package org.example.stortiessearch.application.usecase.dto.request;
 
 import java.util.List;
 

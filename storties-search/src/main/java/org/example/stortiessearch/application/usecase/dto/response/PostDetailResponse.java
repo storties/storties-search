@@ -1,4 +1,4 @@
-package org.example.stortiessearch.application.service.dto.response;
+package org.example.stortiessearch.application.usecase.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

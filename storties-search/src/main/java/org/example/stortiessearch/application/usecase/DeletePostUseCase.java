@@ -1,8 +1,9 @@
-package org.example.stortiessearch.application.service;
+package org.example.stortiessearch.application.usecase;
 
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.DeletePostEvent;
+import org.example.stortiessearch.common.annotations.UseCase;
 import org.example.stortiessearch.infrastructure.mq.producer.DeletePostProducer;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
@@ -10,11 +11,10 @@ import org.example.stortiessearch.infrastructure.client.grpc.user.dto.Authentica
 import org.example.stortiessearch.domain.post.CommandPostRepository;
 import org.example.stortiessearch.domain.post.QueryPostRepository;
 import org.example.stortiessearch.domain.post.model.PostEntity;
-import org.springframework.stereotype.Service;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
-public class DeletePostService {
+public class DeletePostUseCase {
 
     private final CommandPostRepository commandPostRepository;
 

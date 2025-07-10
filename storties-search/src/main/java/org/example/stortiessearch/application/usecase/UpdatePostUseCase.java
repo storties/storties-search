@@ -1,21 +1,21 @@
-package org.example.stortiessearch.application.service;
+package org.example.stortiessearch.application.usecase;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.UpdatePostEvent;
-import org.example.stortiessearch.application.service.dto.request.UpdatePostRequest;
+import org.example.stortiessearch.application.usecase.dto.request.UpdatePostRequest;
+import org.example.stortiessearch.common.annotations.UseCase;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.domain.post.model.PostEntity;
 import org.example.stortiessearch.domain.post.repository.PostJpaRepository;
 import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
 import org.example.stortiessearch.infrastructure.mq.producer.UpdatePostProducer;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
-import org.springframework.stereotype.Service;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
-public class UpdatePostService {
+public class UpdatePostUseCase {
 
     private final PostJpaRepository postJpaRepository;
 

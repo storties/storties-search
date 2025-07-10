@@ -1,14 +1,14 @@
-package org.example.stortiessearch.application.service;
+package org.example.stortiessearch.application.usecase;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.IncreasePostLikeEvent;
+import org.example.stortiessearch.common.annotations.UseCase;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.example.stortiessearch.infrastructure.mq.producer.IncreasePostLikeProducer;
-import org.springframework.stereotype.Service;
 
-@Service // todo Usecase로 변경하자
+@UseCase
 @RequiredArgsConstructor
-public class AddLikeService {
+public class AddLikeUseCase {
 
     private final AuthenticatedUserProvider authenticatedUserProvider;
 

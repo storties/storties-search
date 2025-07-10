@@ -1,19 +1,19 @@
-package org.example.stortiessearch.application.service;
+package org.example.stortiessearch.application.usecase;
 
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.CreatePostEvent;
+import org.example.stortiessearch.common.annotations.UseCase;
 import org.example.stortiessearch.infrastructure.mq.producer.CreatePostProducer;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
 import org.example.stortiessearch.domain.post.CommandPostRepository;
 import org.example.stortiessearch.domain.post.model.PostEntity;
-import org.example.stortiessearch.application.service.dto.request.CreatePostRequest;
-import org.springframework.stereotype.Service;
+import org.example.stortiessearch.application.usecase.dto.request.CreatePostRequest;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
-public class CreatePostService {
+public class CreatePostUseCase {
 
     private final CommandPostRepository commandPostRepository;
 

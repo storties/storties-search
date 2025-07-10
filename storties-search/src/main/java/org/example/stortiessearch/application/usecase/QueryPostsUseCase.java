@@ -1,20 +1,20 @@
-package org.example.stortiessearch.application.service;
+package org.example.stortiessearch.application.usecase;
 
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.example.stortiessearch.application.service.dto.response.PostsResponse;
+import org.example.stortiessearch.application.usecase.dto.response.PostsResponse;
+import org.example.stortiessearch.common.annotations.UseCase;
 import org.example.stortiessearch.domain.post.QueryPostRepository;
 import org.example.stortiessearch.domain.post.model.PostEntity;
 import org.example.stortiessearch.infrastructure.cache.service.GetLikeCountService;
 import org.example.stortiessearch.infrastructure.cache.service.GetViewCountService;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class QueryPostsService {
+public class QueryPostsUseCase {
 
     private final QueryPostRepository queryPostRepository;
 
