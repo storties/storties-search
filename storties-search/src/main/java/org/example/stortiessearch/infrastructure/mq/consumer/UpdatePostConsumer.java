@@ -3,6 +3,9 @@ package org.example.stortiessearch.infrastructure.mq.consumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.stortiessearch.application.event.UpdatePostEvent;
+import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
+import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryPublisher;
+import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.example.stortiessearch.infrastructure.search.domain.post.document.PostDocument;
 import org.example.stortiessearch.infrastructure.search.domain.post.repository.PostSearchRepository;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
@@ -28,13 +31,20 @@ public class UpdatePostConsumer {
 
     private final VectorRestClient vectorRestClient;
 
+    private final JsonSerializer jsonSerializer;
+
+    private final KafkaRetryPublisher kafkaRetryPublisher;
+
     @KafkaListener(
         topics = UPDATE_TOPIC,
         groupId = GROUP_ID,
         containerFactory = CONTAINER_FACTORY
     )
-    public void consume(UpdatePostEvent event, Acknowledgment ack) {
+    public void consume(KafkaEvent kafkaEvent, Acknowledgment ack) {
         try {
+            String payload = kafkaEvent.getPayload();
+            UpdatePostEvent event = jsonSerializer.fromJson(payload, UpdatePostEvent.class);
+
             PostDocument postDocument = postSearchRepository.findById(event.getId())
                 .orElseThrow(ErrorCodes.POST_NOT_FOUND::throwException);
 
@@ -50,7 +60,8 @@ public class UpdatePostConsumer {
 
             ack.acknowledge();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            kafkaRetryPublisher.retryPublish(kafkaEvent);
+            ack.acknowledge();
         }
     }
 }
