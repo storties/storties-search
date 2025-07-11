@@ -1,8 +1,9 @@
-package org.example.stortiessearch.infrastructure.mq;
+package org.example.stortiessearch.infrastructure.mq.retry;
 
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.stortiessearch.infrastructure.mq.KafkaProperties;
 import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
 import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.springframework.data.redis.core.RedisTemplate;
