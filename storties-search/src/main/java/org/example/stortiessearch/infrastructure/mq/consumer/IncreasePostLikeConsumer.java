@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.IncreasePostLikeEvent;
 import org.example.stortiessearch.domain.post.CommandPostRepository;
 import org.example.stortiessearch.domain.post.QueryPostRepository;
+import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
+import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryPublisher;
+import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
@@ -23,22 +26,34 @@ public class IncreasePostLikeConsumer {
 
     private final CommandPostRepository commandPostRepository;
 
+    private final JsonSerializer jsonSerializer;
+
+    private final KafkaRetryPublisher kafkaRetryPublisher;
+
     @KafkaListener(
         topics = INCREASE_LIKE_TOPIC,
         groupId = GROUP_ID,
         containerFactory = CONTAINER_FACTORY
     )
-    public void consume(IncreasePostLikeEvent event, Acknowledgment ack) {
-        String likeCountKey = "post:" + event.getPostId() + ":likes";
+    public void consume(KafkaEvent kafkaEvent, Acknowledgment ack) {
+        try {
+            String payload = kafkaEvent.getPayload();
+            IncreasePostLikeEvent event = jsonSerializer.fromJson(payload, IncreasePostLikeEvent.class);
 
-        boolean isFirst = (queryPostRepository
-            .queryLikeByPostIdAndUserId(event.getPostId(), event.getUserId()) == null);
+            String likeCountKey = "post:" + event.getPostId() + ":likes";
 
-        if (isFirst) {
-            commandPostRepository.savePostLike(event.getPostId(), event.getUserId());
-            redisTemplate.opsForValue().increment(likeCountKey);
+            boolean isFirst = (queryPostRepository
+                .queryLikeByPostIdAndUserId(event.getPostId(), event.getUserId()) == null);
+
+            if (isFirst) {
+                commandPostRepository.savePostLike(event.getPostId(), event.getUserId());
+                redisTemplate.opsForValue().increment(likeCountKey);
+            }
+
+            ack.acknowledge();
+        } catch (RuntimeException e) {
+            kafkaRetryPublisher.retryPublish(kafkaEvent);
+            ack.acknowledge();
         }
-
-        ack.acknowledge();
     }
 }
