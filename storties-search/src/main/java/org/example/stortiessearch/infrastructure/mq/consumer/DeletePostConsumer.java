@@ -4,6 +4,9 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.stortiessearch.application.event.DeletePostEvent;
+import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
+import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryPublisher;
+import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.example.stortiessearch.infrastructure.search.domain.post.document.PostDocument;
 import org.example.stortiessearch.infrastructure.search.domain.post.repository.PostSearchRepository;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -21,12 +24,19 @@ public class DeletePostConsumer {
 
     private final PostSearchRepository postSearchRepository;
 
+    private final JsonSerializer jsonSerializer;
+
+    private final KafkaRetryPublisher kafkaRetryPublisher;
+
     @KafkaListener(
         topics = DELETE_TOPIC,
         groupId = GROUP_ID,
         containerFactory = CONTAINER_FACTORY
     )
-    public void consume(DeletePostEvent event, Acknowledgment ack) {
+    public void consume(KafkaEvent kafkaEvent, Acknowledgment ack) {
+        String payload = kafkaEvent.getPayload();
+        DeletePostEvent event = jsonSerializer.fromJson(payload, DeletePostEvent.class);
+
         try {
             Optional<PostDocument> post = postSearchRepository.findById(event.getPostId());
             if (post.isEmpty()) {
@@ -38,7 +48,8 @@ public class DeletePostConsumer {
 
             ack.acknowledge();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            kafkaRetryPublisher.retryPublish(kafkaEvent);
+            ack.acknowledge();
         }
     }
 }
