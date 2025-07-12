@@ -5,7 +5,7 @@ import org.example.stortiessearch.application.event.IncreasePostLikeEvent;
 import org.example.stortiessearch.domain.post.CommandPostRepository;
 import org.example.stortiessearch.domain.post.QueryPostRepository;
 import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
-import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryPublisher;
+import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryProducer;
 import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -28,7 +28,7 @@ public class IncreasePostLikeConsumer {
 
     private final JsonSerializer jsonSerializer;
 
-    private final KafkaRetryPublisher kafkaRetryPublisher;
+    private final KafkaRetryProducer kafkaRetryProducer;
 
     @KafkaListener(
         topics = INCREASE_LIKE_TOPIC,
@@ -52,7 +52,9 @@ public class IncreasePostLikeConsumer {
 
             ack.acknowledge();
         } catch (RuntimeException e) {
-            kafkaRetryPublisher.retryPublish(kafkaEvent);
+            kafkaEvent.setErrorMessage(e.getMessage());
+            kafkaRetryProducer.retryPublish(kafkaEvent);
+
             ack.acknowledge();
         }
     }

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.stortiessearch.application.event.CreatePostEvent;
 import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
-import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryPublisher;
+import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryProducer;
 import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.example.stortiessearch.infrastructure.search.domain.post.document.PostDocument;
 import org.example.stortiessearch.infrastructure.search.domain.post.repository.PostSearchRepository;
@@ -29,7 +29,7 @@ public class CreatePostConsumer {
 
     private final JsonSerializer jsonSerializer;
 
-    private final KafkaRetryPublisher kafkaRetryPublisher;
+    private final KafkaRetryProducer kafkaRetryProducer;
 
     @KafkaListener(
         topics = CREATE_TOPIC,
@@ -56,7 +56,9 @@ public class CreatePostConsumer {
 
             ack.acknowledge();
         } catch (Exception e) {
-            kafkaRetryPublisher.retryPublish(kafkaEvent);
+            kafkaEvent.setErrorMessage(e.getMessage());
+            kafkaRetryProducer.retryPublish(kafkaEvent);
+
             ack.acknowledge();
         }
     }

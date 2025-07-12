@@ -6,7 +6,7 @@ import org.example.stortiessearch.application.event.IncreasePostViewEvent;
 import org.example.stortiessearch.domain.post.CommandPostRepository;
 import org.example.stortiessearch.infrastructure.mq.KafkaProperties;
 import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
-import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryPublisher;
+import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryProducer;
 import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -24,7 +24,7 @@ public class IncreasePostViewConsumer {
 
     private final JsonSerializer jsonSerializer;
 
-    private final KafkaRetryPublisher kafkaRetryPublisher;
+    private final KafkaRetryProducer kafkaRetryProducer;
 
     private static final Duration TTL = Duration.ofHours(5);
 
@@ -50,7 +50,9 @@ public class IncreasePostViewConsumer {
             }
             ack.acknowledge();
         } catch (RuntimeException e) {
-            kafkaRetryPublisher.retryPublish(kafkaEvent);
+            kafkaEvent.setErrorMessage(e.getMessage());
+            kafkaRetryProducer.retryPublish(kafkaEvent);
+
             ack.acknowledge();
         }
 

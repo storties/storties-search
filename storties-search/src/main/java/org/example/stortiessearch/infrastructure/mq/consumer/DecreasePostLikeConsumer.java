@@ -6,7 +6,7 @@ import org.example.stortiessearch.domain.post.CommandPostRepository;
 import org.example.stortiessearch.domain.post.QueryPostRepository;
 import org.example.stortiessearch.domain.post.model.PostLikeEntity;
 import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
-import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryPublisher;
+import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryProducer;
 import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -29,7 +29,7 @@ public class DecreasePostLikeConsumer {
 
     private final JsonSerializer jsonSerializer;
 
-    private final KafkaRetryPublisher kafkaRetryPublisher;
+    private final KafkaRetryProducer kafkaRetryProducer;
 
     @KafkaListener(
         topics = DECREASE_LIKE_TOPIC,
@@ -53,7 +53,9 @@ public class DecreasePostLikeConsumer {
 
             ack.acknowledge();
         } catch (Exception e) {
-            kafkaRetryPublisher.retryPublish(kafkaEvent);
+            kafkaEvent.setErrorMessage(e.getMessage());
+            kafkaRetryProducer.retryPublish(kafkaEvent);
+
             ack.acknowledge();
         }
     }
