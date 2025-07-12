@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.IncreasePostLikeEvent;
 import org.example.stortiessearch.common.annotations.UseCase;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
-import org.example.stortiessearch.infrastructure.mq.producer.IncreasePostLikeProducer;
+import org.example.stortiessearch.infrastructure.mq.kafka.event.like.increase.IncreasePostLikeProducer;
 
 @UseCase
 @RequiredArgsConstructor
