@@ -24,14 +24,14 @@ public class KafkaRetryScheduler {
 
     @Scheduled(fixedDelay = 30000)
     public void processShortQueue() {
-        for (String topic : KafkaProperties.RETRY_TOPICS) {
+        for (String topic : KafkaProperties.RETRY_TARGET_TOPICS) {
             process("redis:short:" + topic);
         }
     }
 
     @Scheduled(fixedDelay = 60000)
     public void processLongQueue() {
-        for (String topic : KafkaProperties.RETRY_TOPICS) {
+        for (String topic : KafkaProperties.RETRY_TARGET_TOPICS) {
             process("redis:long:" + topic);
         }
     }
