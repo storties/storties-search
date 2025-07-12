@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.IncreasePostViewEvent;
 import org.example.stortiessearch.domain.post.CommandPostRepository;
 import org.example.stortiessearch.infrastructure.mq.KafkaProperties;
+import org.example.stortiessearch.infrastructure.mq.dto.KafkaEvent;
+import org.example.stortiessearch.infrastructure.mq.retry.KafkaRetryProducer;
+import org.example.stortiessearch.infrastructure.mq.util.JsonSerializer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
@@ -19,6 +22,10 @@ public class IncreasePostViewConsumer {
 
     private final CommandPostRepository commandPostRepository;
 
+    private final JsonSerializer jsonSerializer;
+
+    private final KafkaRetryProducer kafkaRetryProducer;
+
     private static final Duration TTL = Duration.ofHours(5);
 
     @KafkaListener(
@@ -26,17 +33,28 @@ public class IncreasePostViewConsumer {
         groupId = KafkaProperties.GROUP_ID,
         containerFactory = KafkaProperties.CONTAINER_FACTORY
     )
-    public void consume(IncreasePostViewEvent event, Acknowledgment ack) {
-        String deduplicationKey = "viewed:" + event.getUserId() + ":" + event.getPostId();
-        String viewCountKey = "post:" + event.getPostId() + ":views";
+    public void consume(KafkaEvent kafkaEvent, Acknowledgment ack) {
+        try {
+            String payLoad = kafkaEvent.getPayload();
+            IncreasePostViewEvent event = jsonSerializer.fromJson(payLoad, IncreasePostViewEvent.class);
 
-        Boolean isFirstInRedis = redisTemplate.opsForValue()
-            .setIfAbsent(deduplicationKey, "1", TTL);
+            String deduplicationKey = "viewed:" + event.getUserId() + ":" + event.getPostId();
+            String viewCountKey = "post:" + event.getPostId() + ":views";
 
-        if (Boolean.TRUE.equals(isFirstInRedis)) {
-            redisTemplate.opsForValue().increment(viewCountKey);
-            commandPostRepository.savePostViewLog(event.getPostId(), event.getUserId());
+            Boolean isFirstInRedis = redisTemplate.opsForValue()
+                .setIfAbsent(deduplicationKey, "1", TTL);
+
+            if (Boolean.TRUE.equals(isFirstInRedis)) {
+                redisTemplate.opsForValue().increment(viewCountKey);
+                commandPostRepository.savePostViewLog(event.getPostId(), event.getUserId());
+            }
+            ack.acknowledge();
+        } catch (RuntimeException e) {
+            kafkaEvent.setErrorMessage(e.getMessage());
+            kafkaRetryProducer.retryPublish(kafkaEvent);
+
+            ack.acknowledge();
         }
-        ack.acknowledge();
+
     }
 }
