@@ -4,7 +4,7 @@ import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.IncreasePostViewEvent;
 import org.example.stortiessearch.domain.post.CommandPostRepository;
-import org.example.stortiessearch.infrastructure.mq.kafka.KafkaProperties;
+import org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaProperties;
 import org.example.stortiessearch.infrastructure.mq.kafka.dto.KafkaEvent;
 import org.example.stortiessearch.infrastructure.mq.kafka.system.retry.KafkaRetryProducer;
 import org.example.stortiessearch.infrastructure.mq.kafka.util.JsonSerializer;
@@ -12,6 +12,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
+
+import static org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaProperties.CONTAINER_FACTORY;
+import static org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaProperties.GROUP_ID;
+import static org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaTopicProperties.INCREASE_VIEW_TOPIC;
 
 // todo luaScript로 데이터 정합성 보장
 @Component
@@ -29,9 +33,9 @@ public class IncreasePostViewConsumer {
     private static final Duration TTL = Duration.ofHours(5);
 
     @KafkaListener(
-        topics = KafkaProperties.INCREASE_VIEW_TOPIC,
-        groupId = KafkaProperties.GROUP_ID,
-        containerFactory = KafkaProperties.CONTAINER_FACTORY
+        topics = INCREASE_VIEW_TOPIC,
+        groupId = GROUP_ID,
+        containerFactory = CONTAINER_FACTORY
     )
     public void consume(KafkaEvent kafkaEvent, Acknowledgment ack) {
         try {

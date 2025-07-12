@@ -1,4 +1,4 @@
-package org.example.stortiessearch.infrastructure.mq.kafka;
+package org.example.stortiessearch.infrastructure.mq.kafka.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;

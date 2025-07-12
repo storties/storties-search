@@ -10,15 +10,15 @@ import org.example.stortiessearch.infrastructure.search.domain.post.document.Pos
 import org.example.stortiessearch.infrastructure.search.domain.post.repository.PostSearchRepository;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.infrastructure.client.rest.VectorRestClient;
-import org.example.stortiessearch.infrastructure.mq.kafka.KafkaProperties;
+import org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaProperties;
 import org.example.stortiessearch.infrastructure.search.support.ESPostUpdateUseCase;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
-import static org.example.stortiessearch.infrastructure.mq.kafka.KafkaProperties.CONTAINER_FACTORY;
-import static org.example.stortiessearch.infrastructure.mq.kafka.KafkaProperties.GROUP_ID;
-import static org.example.stortiessearch.infrastructure.mq.kafka.KafkaProperties.UPDATE_TOPIC;
+import static org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaProperties.CONTAINER_FACTORY;
+import static org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaProperties.GROUP_ID;
+import static org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaTopicProperties.UPDATE_TOPIC;
 
 @Component
 @RequiredArgsConstructor

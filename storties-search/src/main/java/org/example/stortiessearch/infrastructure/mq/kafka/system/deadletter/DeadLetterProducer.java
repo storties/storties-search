@@ -7,7 +7,7 @@ import org.example.stortiessearch.infrastructure.mq.kafka.util.JsonSerializer;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import static org.example.stortiessearch.infrastructure.mq.kafka.KafkaProperties.DEAD_LETTER_TOPIC;
+import static org.example.stortiessearch.infrastructure.mq.kafka.properties.KafkaTopicProperties.DEAD_LETTER_TOPIC;
 
 @Component
 @Slf4j
