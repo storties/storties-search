@@ -10,7 +10,7 @@ import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.domain.post.model.PostEntity;
 import org.example.stortiessearch.domain.post.repository.PostJpaRepository;
 import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;
-import org.example.stortiessearch.infrastructure.mq.producer.UpdatePostProducer;
+import org.example.stortiessearch.infrastructure.mq.kafka.event.post.update.UpdatePostProducer;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 
 @UseCase

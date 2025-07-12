@@ -10,7 +10,7 @@ import org.example.stortiessearch.infrastructure.cache.service.GetLikeCountServi
 import org.example.stortiessearch.infrastructure.cache.service.GetViewCountService;
 import org.example.stortiessearch.domain.post.repository.PostJpaRepository;
 import org.example.stortiessearch.application.usecase.dto.response.PostDetailResponse;
-import org.example.stortiessearch.infrastructure.mq.producer.IncreasePostViewProducer;
+import org.example.stortiessearch.infrastructure.mq.kafka.event.viewlog.IncreasePostViewProducer;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
