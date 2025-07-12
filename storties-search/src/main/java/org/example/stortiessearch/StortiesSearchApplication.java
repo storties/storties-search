@@ -11,5 +11,4 @@ public class StortiesSearchApplication {
     public static void main(String[] args) {
         SpringApplication.run(StortiesSearchApplication.class, args);
     }
-
 }
