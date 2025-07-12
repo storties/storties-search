@@ -4,7 +4,7 @@ import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.example.stortiessearch.application.event.DeletePostEvent;
 import org.example.stortiessearch.common.annotations.UseCase;
-import org.example.stortiessearch.infrastructure.mq.producer.DeletePostProducer;
+import org.example.stortiessearch.infrastructure.mq.kafka.event.post.delete.DeletePostProducer;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
 import org.example.stortiessearch.global.exception.error.ErrorCodes;
 import org.example.stortiessearch.infrastructure.client.grpc.user.dto.AuthenticatedUser;

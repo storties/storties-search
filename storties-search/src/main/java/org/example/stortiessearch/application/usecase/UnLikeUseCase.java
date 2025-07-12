@@ -5,7 +5,7 @@ import org.example.stortiessearch.application.event.DecreasePostLikeEvent;
 import org.example.stortiessearch.common.annotations.UseCase;
 import org.example.stortiessearch.domain.post.QueryPostRepository;
 import org.example.stortiessearch.global.authentication.AuthenticatedUserProvider;
-import org.example.stortiessearch.infrastructure.mq.producer.DecreasePostLikeProducer;
+import org.example.stortiessearch.infrastructure.mq.kafka.event.like.decrease.DecreasePostLikeProducer;
 
 @UseCase
 @RequiredArgsConstructor
